@@ -17,3 +17,7 @@ export const getAllProjects = () => {
 export const getOneProject = (id) => {
     return http.get(`/projects/${id}`)
 }
+
+export const updateOneProject = (id) => {
+    return http.put(`/projects/${id}`)
+}

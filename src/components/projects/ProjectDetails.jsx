@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link, Redirect, useParams } from 'react-router-dom';
 import { getOneProject } from '../../services/BaseService';
 import SyncLoader from 'react-spinners/SyncLoader';
+import EditProject from './EditProject'
 
 const ProjectDetails = () => {
-    const { id } = useParams()
+    const { id, title } = useParams()
     const [project, setProject] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -30,6 +31,14 @@ const ProjectDetails = () => {
         }
     }, [loading, fetchOneProject])
 
+    const renderEditForm = () => {
+        if (title) {
+            fetchOneProject()
+        } else {
+            return <EditProject theProject={title} getTheProject={fetchOneProject} />
+        }
+    }
+
     return (
         <div>
             {
@@ -39,9 +48,10 @@ const ProjectDetails = () => {
                         <SyncLoader color="purple" />
                     </div>
                 ) : (
-                    <div>
+                    <div className="container">
                         <h1>{project.title}</h1>
                         <p>{project.description}</p>
+                        <div>{renderEditForm}</div>
                         <Link to={'/projects'}>Back to projects</Link>
                     </div>
                 )

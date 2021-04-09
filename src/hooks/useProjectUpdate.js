@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { createProject } from '../../services/BaseService';
+import { useEffect, useState } from 'react';
+import { updateOneProject } from '../services/BaseService';
+import { useParams } from 'react-router-dom';
 
-const AddProject = () => {
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+const useProjectUpdate = () => {
+    const { title, description } = useParams()
+    const [title, setTitle] = useState(title)
+    const [description, setDescription] = useState(description)
 
     const onSubmit = (e) => {
         e.preventDefault();
         console.log('prevProject:', title, description)
 
-        createProject({title, description})
+        updateOneProject({title, description})
             .then(() => {
                 setTitle('')
                 setDescription('')
@@ -27,24 +29,23 @@ const AddProject = () => {
         }
     }
 
-    return (
+    return(
         <div>
-            <h3 className="text-center">Create new project</h3>
+            <hr />
+            <h3 className="text-center">Update Project</h3>
             <form className="container" onSubmit={onSubmit}>
                 <div className="form-group">
                     <label>Title:</label>
-                    <input className="form-control" type="text" name="title" value={title} onChange={onChange}/>
+                    <input type="text" name="title" value={title} onChange={onChange}/>
                 </div>
                 <div className="form-group">
                     <label>Description:</label>
-                    <textarea className="form-control" name="description" value={description} onChange={onChange} />
+                    <textarea name="description" value={description} onChange={onChange} />
                 </div>
-                <div className="d-flex justify-content-center">
-                    <button className="btn btn-primary" type="submit" >Create</button>
+                <div className="form-group">
+                <button className="btn btn-primary" type="submit" >Update</button>
                 </div>
             </form>
-        </div>
+      </div>
     )
 }
-
-export default AddProject;
