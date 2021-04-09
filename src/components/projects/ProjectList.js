@@ -17,21 +17,22 @@ const ProjectList = () => {
                         </div>
                     ) : (
                         <>
-                        <div style={{width: '60%', float:"left"}}>
+                        <div>
+                            <AddProject getData={() => this.getAllProjects()}/>
+                        </div>
+                        <div className="mt-4 text-left container">
+                            <h3>Projects Created</h3>
                         { 
                             projects.map(project => {
                                 return (
                                     <div key={project._id}>
                                         <Link to={`/projects/${project._id}`}>
-                                            <h3>{project.title}</h3>
+                                            <h5>{project.title}</h5>
                                         </Link>
-                                        {/* <p style={{maxWidth: '400px'}} >{project.description} </p> */}
+                                        <p>{project.description} </p>
                                     </div>
                                 )})
                         }
-                        </div>
-                        <div style={{width: '40%', float:"right"}}>
-                            <AddProject getData={() => this.getAllProjects()}/> {/* <== !!! */}
                         </div>
                         </>
                     )

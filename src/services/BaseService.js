@@ -13,3 +13,7 @@ export const createProject = (formFields) => {
 export const getAllProjects = () => {
     return http.get('/projects')
 }
+
+export const getOneProject = (id) => {
+    return http.get(`/projects/${id}`)
+}

@@ -11,7 +11,6 @@ const AddProject = () => {
         console.log('prevPost:', title, description)
 
         createProject({title, description})
-        //axios.post("http://localhost:5000/api/projects", { title, description })
             .then(() => {
                 setTitle('')
                 setDescription('')
